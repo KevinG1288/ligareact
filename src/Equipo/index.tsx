@@ -66,7 +66,7 @@ function Equipo() {
       <p><strong>Posición:</strong> {data.team.ranking.position}</p>
       <p><strong>Competencia:</strong> {data.team.ranking.competition}</p>
 
-      <h2>Redes</h2>
+      <h2>Rede</h2>
       <ul>
         <li>
           <a href={data.team.social.facebook} target="_blank" rel="noreferrer">
