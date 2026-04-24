@@ -1,6 +1,6 @@
+import "./style.css";
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-
+import { useState, useEffect } from 'react'
 interface TeamData {
   team: {
     name: string;
@@ -26,32 +26,26 @@ interface TeamData {
     };
   };
 }
-
-function Equipo() {
-  const { equipo } = useParams<{ equipo: string }>();
-
-  const [data, setData] = useState<TeamData | null>(null);
-
-  useEffect(() => {
-  if (!equipo) return;
-  const fetchData = async () => {
-    try {
-      const res = await fetch(
-        `https://raw.githubusercontent.com/sdtibata/dataliga/main/${equipo}.json`
-      );
-
-      const data = await res.json();
-      setData(data);
-    } catch (error) {
-      console.error("Error cargando datos:", error);
-    }
-  };
-  fetchData();
-}, [equipo]);
-
-  if (!data) return <p>Cargando...</p>;
-
-  return (
+function Equipo(){
+    const {equipo}=useParams<{equipo:string}>()
+    const [data,setData]= useState<TeamData | null>(null);
+    useEffect(() => {
+         if (!equipo) return;
+        const fetchData = async () => {
+          try {
+            const res = await fetch(`https://raw.githubusercontent.com/sdtibata/dataliga/refs/heads/main/${equipo}.json`)
+            const data = await res.json()
+    
+            setData(data)
+          } catch (error) {
+            console.error('Error cargando datos:', error)
+          }
+        }
+    
+        fetchData()
+      }, [equipo])
+      if (!data) return <p>Cargando...</p>;
+    return (
     <div>
       <h1>{data.team.name}</h1>
 
@@ -66,7 +60,7 @@ function Equipo() {
       <p><strong>Posición:</strong> {data.team.ranking.position}</p>
       <p><strong>Competencia:</strong> {data.team.ranking.competition}</p>
 
-      <h2>Rede</h2>
+      <h2>Redes</h2>
       <ul>
         <li>
           <a href={data.team.social.facebook} target="_blank" rel="noreferrer">
@@ -101,5 +95,4 @@ function Equipo() {
     </div>
   );
 }
-
-export default Equipo;
+export default Equipo
